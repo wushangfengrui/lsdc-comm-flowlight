@@ -1,0 +1,8 @@
+/.gradle/
+/.idea
+/build
+/log
+/out
+lsdc-comm-flowlight.iml
+gradlew.*
+gradlew

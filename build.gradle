@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+}
+apply plugin: 'maven-publish'
+group 'com.lishengzn'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+tasks.withType(Javadoc) {
+    options.encoding = "UTF-8"
+}
+
+repositories {
+    mavenLocal()
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    maven {
+        url 'https://maven.mangoautomation.net/repository/ias-release/'
+    }
+}
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+}
+task javadocJar(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
+publishing {
+    publications {
+        myPublish(MavenPublication){
+            from components.java
+            artifact sourcesJar
+        }
+    }
+}
+
+dependencies {
+    compile 'com.lishengzn:lsdc-comm:2.0-SNAPSHOT'
+}
+
